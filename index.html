@@ -34,22 +34,24 @@
           display: flex;
           gap: 2rem;
 
+          a {
+            background: var(--dark-pink-color);
+            color: var(--white-color);
+            text-decoration: none;
+          }
+
           button {
+            background: var(--dark-blue-color);
+            color: var(--white-color);
+          }
+
+          button,
+          a {
             padding: 0.5rem 2rem;
             font-size: 1rem;
             border: none;
             cursor: pointer;
             border-radius: 0.3rem;
-
-            &:first-child {
-              background: var(--dark-pink-color);
-              color: var(--white-color);
-            }
-
-            &:last-child {
-              background: var(--dark-blue-color);
-              color: var(--white-color);
-            }
           }
         }
       }
@@ -58,13 +60,13 @@
   <body>
     <h1>Wil jij mijn valentijn wezen?</h1>
     <div>
-      <button>Ja</button>
+      <a href="jippie.html">Ja</a>
       <button>Nee</button>
     </div>
   </body>
   <script>
     const neeBtn = document.querySelector("button:nth-child(2)");
-    const jaBtn = document.querySelector("button:nth-child(1)");
+    const jaBtn = document.querySelector("a");
 
     let jaScale = 1;
 
