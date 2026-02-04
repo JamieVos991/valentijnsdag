@@ -43,6 +43,7 @@
           button {
             background: var(--dark-blue-color);
             color: var(--white-color);
+            z-index: 2;
           }
 
           button,
@@ -65,22 +66,41 @@
     </div>
   </body>
   <script>
-    const neeBtn = document.querySelector("button:nth-child(2)");
+    const neeBtn = document.querySelector("button");
     const jaBtn = document.querySelector("a");
 
     let jaScale = 1;
 
-    function punishNee() {
-      // Random positie
-      const maxX = window.innerWidth - neeBtn.offsetWidth;
-      const maxY = window.innerHeight - neeBtn.offsetHeight;
+    function isOverlapping(rect1, rect2) {
+      return !(
+        rect1.right < rect2.left ||
+        rect1.left > rect2.right ||
+        rect1.bottom < rect2.top ||
+        rect1.top > rect2.bottom
+      );
+    }
 
-      const x = Math.random() * maxX;
-      const y = Math.random() * maxY;
+    function punishNee() {
+      const jaRect = jaBtn.getBoundingClientRect();
+
+      let x, y, neeRect;
+      let attempts = 0;
 
       neeBtn.style.position = "fixed";
-      neeBtn.style.left = `${x}px`;
-      neeBtn.style.top = `${y}px`;
+
+      do {
+        const maxX = window.innerWidth - neeBtn.offsetWidth;
+        const maxY = window.innerHeight - neeBtn.offsetHeight;
+
+        x = Math.random() * maxX;
+        y = Math.random() * maxY;
+
+        neeBtn.style.left = `${x}px`;
+        neeBtn.style.top = `${y}px`;
+
+        neeRect = neeBtn.getBoundingClientRect();
+        attempts++;
+      } while (isOverlapping(neeRect, jaRect) && attempts < 50);
 
       jaScale += 0.2;
       jaBtn.style.transform = `scale(${jaScale})`;
