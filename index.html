@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentijnsdag</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --background-color: #ddaed3;
+        --dark-pink-color: #d02752;
+        --dark-blue-color: #111f35;
+        --white-color: #fff;
+      }
+
+      body {
+        background: var(--background-color);
+        height: 100vh;
+        display: grid;
+        justify-items: center;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        text-align: center;
+        place-content: center;
+        gap: 2rem;
+        padding: 1rem;
+
+        div {
+          display: flex;
+          gap: 2rem;
+
+          button {
+            padding: 0.5rem 2rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 0.3rem;
+
+            &:first-child {
+              background: var(--dark-pink-color);
+              color: var(--white-color);
+            }
+
+            &:last-child {
+              background: var(--dark-blue-color);
+              color: var(--white-color);
+            }
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Wil jij mijn valentijn wezen?</h1>
+    <div>
+      <button>Ja</button>
+      <button>Nee</button>
+    </div>
+  </body>
+  <script>
+    const neeBtn = document.querySelector("button:nth-child(2)");
+    const jaBtn = document.querySelector("button:nth-child(1)");
+
+    let jaScale = 1;
+
+    function punishNee() {
+      // Random positie
+      const maxX = window.innerWidth - neeBtn.offsetWidth;
+      const maxY = window.innerHeight - neeBtn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      neeBtn.style.position = "fixed";
+      neeBtn.style.left = `${x}px`;
+      neeBtn.style.top = `${y}px`;
+
+      jaScale += 0.15;
+      jaBtn.style.transform = `scale(${jaScale})`;
+    }
+
+    neeBtn.addEventListener("mouseenter", punishNee);
+    neeBtn.addEventListener("click", punishNee);
+  </script>
+</html>
